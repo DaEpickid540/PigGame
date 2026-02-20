@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  height: 100vh;
+  color: #e6e6e6;
+  background-image: linear-gradient(to top left, #0a0a0a 0%, #1a0000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LAYOUT */
+main {
+  position: relative;
+  width: 100rem;
+  height: 60rem;
+  display: flex;
+
+  /* REMOVE ALL PANEL VISUALS */
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.player {
+  flex: 50%;
+  padding: 9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.75s;
+  margin: 0 1.5rem; /* equal spacing between the two boxes */
+  border-radius: 12px; /* rounded corners */
+  background-color: rgba(0, 0, 0, 0.35); /* subtle dark panel */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.25); /* cyberpunk glow */
+}
+
+/* ELEMENTS */
+.name {
+  position: relative;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: #ff2b2b;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.score {
+  font-size: 8rem;
+  font-weight: 300;
+  color: #ff1a1a;
+  margin-bottom: auto;
+  text-shadow: 0 0 12px #ff0000;
+}
+
+.player--active {
+  background-color: rgba(255, 0, 0, 0.08);
+}
+.player--active .name {
+  font-weight: 700;
+  color: #ff3b3b;
+  text-shadow: 0 0 15px #ff0000;
+}
+.player--active .score {
+  font-weight: 400;
+  color: #ff3b3b;
+}
+
+.player--active .current {
+  opacity: 1;
+}
+
+.current {
+  background-color: #ff0000;
+  opacity: 0.85;
+  border-radius: 9px;
+  color: #0a0a0a;
+  width: 65%;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.75s;
+  box-shadow: 0 0 20px #ff0000;
+}
+
+.current-label {
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-size: 1.7rem;
+  color: #1a1a1a;
+}
+
+.current-score {
+  font-size: 3.5rem;
+}
+
+/* ABSOLUTE POSITIONED ELEMENTS */
+.btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffcccc;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s;
+
+  background-color: rgba(255, 0, 0, 0.65);
+  backdrop-filter: blur(10px);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 50rem;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+.btn::first-letter {
+  font-size: 2.4rem;
+  display: inline-block;
+  margin-right: 0.7rem;
+  color: #ffffff;
+}
+
+.btn--new {
+  top: 4rem;
+}
+.btn--roll {
+  top: 39.3rem;
+}
+.btn--hold {
+  top: 46.1rem;
+}
+
+.btn:hover {
+  background-color: rgba(255, 0, 0, 0.85);
+  box-shadow: 0 0 25px #ff0000;
+  color: #ffffff;
+}
+
+.btn:active {
+  transform: translate(-50%, 3px);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.dice {
+  position: absolute;
+  left: 50%;
+  top: 16.5rem;
+  transform: translateX(-50%);
+  height: 10rem;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.35);
+  filter: brightness(0.25) saturate(2) hue-rotate(-10deg) contrast(2);
+  filter: brightness(0.25) saturate(2) hue-rotate(-10deg) contrast(2);
+  box-shadow:
+    0 0 25px #ff0000,
+    0 0 50px rgba(255, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+.player--winner {
+  background-color: rgb(77, 18, 18);
+}
+
+.player--winner .name {
+  font-weight: 700;
+  color: #ff4d4d;
+  text-shadow: 0 0 20px #ff0000;
+}
+
+#winnerDisplay {
+  position: absolute;
+  top: -3rem; /* moves it ABOVE the player boxes */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  color: #ff2b2b;
+  text-shadow:
+    0 0 20px #ff0000,
+    0 0 40px rgba(255, 0, 0, 0.7);
+  font-weight: 700;
+  letter-spacing: 2px;
+  pointer-events: none;
+  z-index: 99999; /* forces it above buttons + sections */
+  top: 1rem;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* GLITCH FLICKER */
+.player--active {
+  animation: glitchPulse 1.8s infinite alternate;
+}
+
+@keyframes glitchPulse {
+  0% {
+    box-shadow: 0 0 10px #ff0000;
+  }
+  50% {
+    box-shadow:
+      0 0 25px #ff0000,
+      0 0 10px #ff4d4d inset;
+  }
+  100% {
+    box-shadow: 0 0 15px #ff0000;
+  }
+}
+
+/* NEON EDGE BORDERS */
+.player {
+  border: 1px solid rgba(255, 0, 0, 0.25);
+  box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.25);
+}
+
+.current {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 20px #ff0000,
+    inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.btn {
+  border: 1px solid rgba(255, 0, 0, 0.4);
+}
