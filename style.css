@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
 
 * {
   margin: 0;
@@ -12,148 +12,316 @@ html {
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Share Tech Mono', monospace;
   font-weight: 400;
   height: 100vh;
   color: #e6e6e6;
-  background-image: linear-gradient(to top left, #0a0a0a 0%, #1a0000 100%);
+  background-color: #07070a;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(180, 0, 30, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(180, 0, 30, 0.10) 0%, transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.07) 3px,
+      rgba(0, 0, 0, 0.07) 4px
+    );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  overflow: hidden;
+}
+
+/* Vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.75) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── WIN SCORE CONFIG BAR ──────────────────────── */
+.win-config {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(220, 0, 40, 0.3);
+  padding: 1rem 2.2rem;
+  border-radius: 4px;
+  box-shadow: 0 0 18px rgba(220, 0, 40, 0.15);
+}
+
+.win-config-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.1rem;
+  color: rgba(220, 0, 40, 0.7);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.win-score-input {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  width: 8rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(220, 0, 40, 0.5);
+  color: #ff1a1a;
+  padding: 0.4rem 0.8rem;
+  border-radius: 3px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -moz-appearance: textfield;
+}
+
+.win-score-input::-webkit-outer-spin-button,
+.win-score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.win-score-input:focus {
+  border-color: #ff1a1a;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+}
+
+.win-config-unit {
+  font-size: 1.1rem;
+  color: rgba(200, 200, 200, 0.4);
+  letter-spacing: 0.2em;
+}
+
+.win-score-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.arrow-btn {
+  background: rgba(220, 0, 40, 0.15);
+  border: 1px solid rgba(220, 0, 40, 0.35);
+  color: #ff1a1a;
+  width: 2.4rem;
+  height: 1.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  transition: background 0.15s, box-shadow 0.15s;
+  border-radius: 2px;
 }
 
-/* LAYOUT */
+.arrow-btn:hover {
+  background: rgba(220, 0, 40, 0.35);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+}
+
+/* ── LAYOUT ────────────────────────────────────── */
 main {
   position: relative;
   width: 100rem;
   height: 60rem;
   display: flex;
-
-  /* REMOVE ALL PANEL VISUALS */
   background: transparent;
   box-shadow: none;
   border-radius: 0;
   overflow: visible;
+  z-index: 1;
 }
 
+/* ── PLAYER PANELS ─────────────────────────────── */
 .player {
   flex: 50%;
   padding: 9rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.75s;
-  margin: 0 1.5rem; /* equal spacing between the two boxes */
-  border-radius: 12px; /* rounded corners */
-  background-color: rgba(0, 0, 0, 0.35); /* subtle dark panel */
+  transition: background-color 0.75s, box-shadow 0.75s;
+  margin: 0 1.5rem;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.25); /* cyberpunk glow */
-}
-
-/* ELEMENTS */
-.name {
-  position: relative;
-  font-size: 4rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  word-spacing: 2px;
-  font-weight: 300;
-  margin-bottom: 1rem;
-  color: #ff2b2b;
-  text-shadow: 0 0 10px #ff0000;
-}
-
-.score {
-  font-size: 8rem;
-  font-weight: 300;
-  color: #ff1a1a;
-  margin-bottom: auto;
-  text-shadow: 0 0 12px #ff0000;
+  border: 1px solid rgba(220, 0, 40, 0.2);
+  box-shadow:
+    0 0 18px rgba(255, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 0, 0, 0.05);
 }
 
 .player--active {
-  background-color: rgba(255, 0, 0, 0.08);
+  background-color: rgba(220, 0, 40, 0.07);
+  border-color: rgba(220, 0, 40, 0.45);
+  animation: glitchPulse 2s infinite alternate;
 }
+
+@keyframes glitchPulse {
+  0%   { box-shadow: 0 0 14px rgba(255, 0, 0, 0.35), inset 0 0 15px rgba(255, 0, 0, 0.06); }
+  50%  { box-shadow: 0 0 30px rgba(255, 0, 0, 0.55), inset 0 0 25px rgba(255, 0, 0, 0.12); }
+  100% { box-shadow: 0 0 18px rgba(255, 0, 0, 0.4),  inset 0 0 18px rgba(255, 0, 0, 0.08); }
+}
+
+.player--winner {
+  background-color: rgba(80, 10, 10, 0.6);
+  border-color: #ff1a1a;
+  animation: winnerPulse 1.2s infinite alternate;
+}
+
+@keyframes winnerPulse {
+  0%   { box-shadow: 0 0 30px #ff0000, inset 0 0 25px rgba(255, 0, 0, 0.2); }
+  100% { box-shadow: 0 0 60px #ff0000, inset 0 0 40px rgba(255, 0, 0, 0.35); }
+}
+
+/* ── ELEMENTS ──────────────────────────────────── */
+.name {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: rgba(200, 60, 60, 0.85);
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+  transition: color 0.4s, text-shadow 0.4s;
+}
+
 .player--active .name {
   font-weight: 700;
   color: #ff3b3b;
-  text-shadow: 0 0 15px #ff0000;
+  text-shadow: 0 0 18px #ff0000, 0 0 35px rgba(255, 0, 0, 0.4);
 }
+
+.player--winner .name {
+  font-weight: 700;
+  color: #ff5555;
+  text-shadow: 0 0 25px #ff0000, 0 0 50px rgba(255, 0, 0, 0.6);
+}
+
+.score {
+  font-family: 'Orbitron', monospace;
+  font-size: 8rem;
+  font-weight: 700;
+  color: rgba(200, 40, 40, 0.7);
+  margin-bottom: auto;
+  text-shadow: 0 0 12px rgba(255, 0, 0, 0.3);
+  transition: color 0.4s, text-shadow 0.4s;
+}
+
 .player--active .score {
-  font-weight: 400;
-  color: #ff3b3b;
+  color: #ff2222;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
 }
 
-.player--active .current {
-  opacity: 1;
+.player--winner .score {
+  color: #ff4444;
+  text-shadow: 0 0 30px #ff0000;
 }
 
+/* ── CURRENT SCORE BOX ─────────────────────────── */
 .current {
-  background-color: #ff0000;
-  opacity: 0.85;
-  border-radius: 9px;
+  background: rgba(180, 0, 0, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
   color: #0a0a0a;
   width: 65%;
   padding: 2rem;
   text-align: center;
-  transition: all 0.75s;
-  box-shadow: 0 0 20px #ff0000;
+  transition: opacity 0.75s, box-shadow 0.75s;
+  opacity: 0.5;
+  box-shadow: 0 0 14px rgba(255, 0, 0, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.player--active .current {
+  opacity: 1;
+  box-shadow: 0 0 28px #ff0000, inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .current-label {
+  font-family: 'Share Tech Mono', monospace;
   text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-size: 1.7rem;
-  color: #1a1a1a;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+  color: rgba(10, 10, 10, 0.75);
 }
 
 .current-score {
+  font-family: 'Orbitron', monospace;
   font-size: 3.5rem;
+  font-weight: 700;
+  color: #1a0000;
 }
 
-/* ABSOLUTE POSITIONED ELEMENTS */
+/* ── PROGRESS BAR ──────────────────────────────── */
+.progress-wrap {
+  width: 65%;
+  margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(220, 0, 40, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(180, 0, 0, 0.7), #ff1a1a);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 0%;
+}
+
+.progress-label {
+  font-size: 1rem;
+  color: rgba(200, 200, 200, 0.25);
+  letter-spacing: 0.15em;
+  text-align: right;
+  margin-bottom: 4px;
+}
+
+/* ── BUTTONS ───────────────────────────────────── */
 .btn {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   color: #ffcccc;
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: 1.8rem;
+  background: rgba(180, 0, 0, 0.65);
+  border: 1px solid rgba(255, 0, 0, 0.45);
+  font-family: 'Orbitron', monospace;
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 700;
   transition: all 0.2s;
-
-  background-color: rgba(255, 0, 0, 0.65);
-  backdrop-filter: blur(10px);
-
-  padding: 0.7rem 2.5rem;
+  padding: 0.9rem 2.8rem;
   border-radius: 50rem;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
 }
 
 .btn::first-letter {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   display: inline-block;
   margin-right: 0.7rem;
   color: #ffffff;
 }
 
-.btn--new {
-  top: 4rem;
-}
-.btn--roll {
-  top: 39.3rem;
-}
-.btn--hold {
-  top: 46.1rem;
-}
-
 .btn:hover {
-  background-color: rgba(255, 0, 0, 0.85);
-  box-shadow: 0 0 25px #ff0000;
+  background: rgba(220, 0, 0, 0.85);
+  box-shadow: 0 0 30px #ff0000, 0 0 60px rgba(255, 0, 0, 0.25);
   color: #ffffff;
 }
 
@@ -166,85 +334,53 @@ main {
   outline: none;
 }
 
+.btn--new  { top: 4rem; }
+.btn--roll { top: 39.3rem; }
+.btn--hold { top: 46.1rem; }
+
+/* ── DICE ──────────────────────────────────────── */
 .dice {
   position: absolute;
   left: 50%;
   top: 16.5rem;
   transform: translateX(-50%);
   height: 10rem;
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.35);
-  filter: brightness(0.25) saturate(2) hue-rotate(-10deg) contrast(2);
-  filter: brightness(0.25) saturate(2) hue-rotate(-10deg) contrast(2);
-  box-shadow:
-    0 0 25px #ff0000,
-    0 0 50px rgba(255, 0, 0, 0.6);
   border-radius: 12px;
+  filter: brightness(0.22) saturate(2) hue-rotate(-10deg) contrast(2);
+  box-shadow:
+    0 0 30px #ff0000,
+    0 0 60px rgba(255, 0, 0, 0.5);
+  transition: box-shadow 0.2s;
 }
 
-.player--winner {
-  background-color: rgb(77, 18, 18);
-}
-
-.player--winner .name {
-  font-weight: 700;
-  color: #ff4d4d;
-  text-shadow: 0 0 20px #ff0000;
-}
-
+/* ── WINNER DISPLAY ────────────────────────────── */
 #winnerDisplay {
-  position: absolute;
-  top: -3rem; /* moves it ABOVE the player boxes */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 4rem;
+  position: relative;
+  z-index: 10;
+  font-family: 'Orbitron', monospace;
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: #ff2b2b;
   text-shadow:
     0 0 20px #ff0000,
-    0 0 40px rgba(255, 0, 0, 0.7);
-  font-weight: 700;
-  letter-spacing: 2px;
-  pointer-events: none;
-  z-index: 99999; /* forces it above buttons + sections */
-  top: 1rem;
-  margin-top: 20px;
+    0 0 45px rgba(255, 0, 0, 0.6);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: textFlicker 4s infinite;
 }
 
+@keyframes textFlicker {
+  0%, 94%, 96%, 98%, 100% { opacity: 1; }
+  95% { opacity: 0.5; }
+  97% { opacity: 0.7; }
+  99% { opacity: 0.3; }
+}
+
+/* ── UTILITIES ─────────────────────────────────── */
 .hidden {
   display: none;
-}
-
-/* GLITCH FLICKER */
-.player--active {
-  animation: glitchPulse 1.8s infinite alternate;
-}
-
-@keyframes glitchPulse {
-  0% {
-    box-shadow: 0 0 10px #ff0000;
-  }
-  50% {
-    box-shadow:
-      0 0 25px #ff0000,
-      0 0 10px #ff4d4d inset;
-  }
-  100% {
-    box-shadow: 0 0 15px #ff0000;
-  }
-}
-
-/* NEON EDGE BORDERS */
-.player {
-  border: 1px solid rgba(255, 0, 0, 0.25);
-  box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.25);
-}
-
-.current {
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  box-shadow:
-    0 0 20px #ff0000,
-    inset 0 0 10px rgba(0, 0, 0, 0.6);
-}
-
-.btn {
-  border: 1px solid rgba(255, 0, 0, 0.4);
 }
