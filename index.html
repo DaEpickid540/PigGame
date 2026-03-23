@@ -8,19 +8,49 @@
     <title>Pig Game</title>
   </head>
   <body>
+
+    <!-- Win Score Config -->
+    <div class="win-config">
+      <span class="win-config-label">Target Score</span>
+      <div class="win-score-arrows">
+        <button class="arrow-btn" id="score-up">▲</button>
+        <button class="arrow-btn" id="score-down">▼</button>
+      </div>
+      <input
+        type="number"
+        class="win-score-input"
+        id="win-score-input"
+        value="100"
+        min="10"
+        max="999"
+      />
+      <span class="win-config-unit">PTS</span>
+    </div>
+
+    <!-- Winner announcement -->
     <h1 id="winnerDisplay" class="winnerDisplay"></h1>
+
     <main>
       <section class="player player--0 player--active">
         <h2 class="name" id="name--0">Player 1</h2>
-        <p class="score" id="score--0">43</p>
+        <p class="score" id="score--0">0</p>
+        <div class="progress-wrap">
+          <div class="progress-label" id="pct--0">0%</div>
+          <div class="progress-bar"><div class="progress-fill" id="bar--0"></div></div>
+        </div>
         <div class="current">
           <p class="current-label">Current</p>
           <p class="current-score" id="current--0">0</p>
         </div>
       </section>
+
       <section class="player player--1">
         <h2 class="name" id="name--1">Player 2</h2>
-        <p class="score" id="score--1">24</p>
+        <p class="score" id="score--1">0</p>
+        <div class="progress-wrap">
+          <div class="progress-label" id="pct--1">0%</div>
+          <div class="progress-bar"><div class="progress-fill" id="bar--1"></div></div>
+        </div>
         <div class="current">
           <p class="current-label">Current</p>
           <p class="current-score" id="current--1">0</p>
@@ -31,9 +61,8 @@
       <button class="btn btn--new">🔄 New game</button>
       <button class="btn btn--roll">🎲 Roll dice</button>
       <button class="btn btn--hold">📥 Hold</button>
-
-      <div class="scanlines"></div>
     </main>
+
     <script src="script.js"></script>
   </body>
 </html>
